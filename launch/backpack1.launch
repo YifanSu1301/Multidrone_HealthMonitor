@@ -1,0 +1,6 @@
+<launch>
+
+	<node name="talker" pkg="mf_gps_backpack" type="publisher.py" />
+	<node name="listener" pkg="mf_gps_backpack" type="subscriber.py" output="screen"  />
+
+</launch>
