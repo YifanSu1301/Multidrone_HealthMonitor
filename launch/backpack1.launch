@@ -1,6 +1,6 @@
 <launch>
 
-	<node name="talker" pkg="mf_gps_backpack" type="publisher.py" />
-	<node name="listener" pkg="mf_gps_backpack" type="subscriber.py" output="screen"  />
-
+	<include file="$(find microstrain_inertial_driver)/launch/microstrain.launch" />
+	<node pkg="rosbag" type="record" name="record_gps" args="-a -o $(env HOME)/rosbag/" output="screen" />
+		
 </launch>

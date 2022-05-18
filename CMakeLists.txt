@@ -204,7 +204,7 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test
-catkin_install_python(PROGRAMS scripts/publisher.py scripts/subscriber.py
+catkin_install_python(PROGRAMS src/publisher.py src/subscriber.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
