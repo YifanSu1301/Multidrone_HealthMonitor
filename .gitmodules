@@ -1,0 +1,3 @@
+[submodule "communication_manager"]
+	path = communication_manager
+	url = https://AndrewSu1301@bitbucket.org/castacks/communication_manager.git

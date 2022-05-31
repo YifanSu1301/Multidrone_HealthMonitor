@@ -1,6 +1,5 @@
 <launch>
 
-	<include file="$(find microstrain_inertial_driver)/launch/microstrain.launch" />
 	<node pkg="rosbag" type="record" name="record_gps" args="-a -o $(env HOME)/bags/" output="screen" />
 		
 </launch>
