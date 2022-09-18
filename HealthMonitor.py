@@ -32,12 +32,23 @@ class HealthMonitor():
 
         # 2. Subscribe topics
         self.odom_status_sub = rospy.Subscriber('/odom_out', Odometry, self.odom_callback)
+        self.gnss1_status_sub = rospy.Subscriber('/gnss1/fix_info', Odometry, self.gnss1_callback)
+        self.gnss2_status_sub = rospy.Subscriber('/gnss2/fix_info', Odometry, self.gnss2_callback)
+        self.rtk_status_sub = rospy.Subscriber('/rtk/status_v1', Odometry, self.rtk_callback)
 
     def odom_callback(self,data):
         self.odom_pub_status.data = True
+    def gnss1_callback(self,data):
+        self.gnss1_pub_status.data = True
+    def gnss2_callback(self,data):
+        self.gnss2_pub_status.data = True
+    def rtk_callback(self,data):
+        self.rtk_pub_status.data = True
+    
 
     def getStatus(self):
-        status = self.odom_pub_status.data 
+        status = (self.odom_pub_status.data and self.gnss1_pub_status.data and 
+                    self.gnss2_pub_status.data and self.rtk_pub_status.data)
         return status
 
 
