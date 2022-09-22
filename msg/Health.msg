@@ -1,0 +1,10 @@
+uint8 sat1_num
+uint8 sat2_num
+float64[9] sat1_covariance
+string sat1_cov_type
+float64[9] sat2_covariance
+string sat2_cov_type
+string RTK_status
+microstrain_inertial_msgs/FilterStatus filter
+microstrain_inertial_msgs/GNSSAidingStatus gnss1_aiding
+microstrain_inertial_msgs/GNSSAidingStatus gnss2_aiding
