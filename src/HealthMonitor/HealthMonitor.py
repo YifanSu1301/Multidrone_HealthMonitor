@@ -42,23 +42,23 @@ class HealthMonitor():
 
         # 1c. Initialize Overall Publisher
         robotName = os.uname()[1] # get the system host name
-        self.OverallSuccess_pub = rospy.Publisher( '/overall_success', Bool, queue_size = 1)
+        self.OverallSuccess_pub = rospy.Publisher('overall_success', Bool, queue_size = 1)
 
-        # 1d. Initialize Dbug Message Publisher
-        self.debug_info_pub = rospy.Publisher( '/debug_info', Health, queue_size = 1)
+        # 1d. Initialize Debug Message Publisher
+        self.debug_info_pub = rospy.Publisher('debug_info', Health, queue_size = 1)
 
         # 2. Subscribe topics
-        self.odom_status_sub = rospy.Subscriber('/odom_out', Odometry, self.odom_callback)
-        self.gnss1_status_sub = rospy.Subscriber('/gnss1/fix_info', GNSSFixInfo, self.gnss1_fixinfo_callback)
-        self.gnss2_status_sub = rospy.Subscriber('/gnss2/fix_info', GNSSFixInfo, self.gnss2_fixinfo_callback)
-        self.rtk_status_sub = rospy.Subscriber('/rtk/status_v1', RTKStatusV1, self.rtk_callback)
-        self.gnss1_aiding_sub = rospy.Subscriber('/gnss1/aiding_status', GNSSAidingStatus, self.gnss1_aiding_callback)
-        self.gnss2_aiding_sub = rospy.Subscriber('/gnss2/aiding_status', GNSSAidingStatus, self.gnss2_aiding_callback)
-        self.filter_sub = rospy.Subscriber('/nav/status', FilterStatus, self.filter_callback)
-        self.gnss1_fix_sub = rospy.Subscriber('/gnss1/fix', NavSatFix, self.gnss1_fix_callback)
-        self.gnss2_fix_sub = rospy.Subscriber('/gnss2/fix', NavSatFix, self.gnss2_fix_callback)
+        self.odom_status_sub = rospy.Subscriber('odom_out', Odometry, self.odom_callback)
+        self.gnss1_status_sub = rospy.Subscriber('gnss1/fix_info', GNSSFixInfo, self.gnss1_fixinfo_callback)
+        self.gnss2_status_sub = rospy.Subscriber('gnss2/fix_info', GNSSFixInfo, self.gnss2_fixinfo_callback)
+        self.rtk_status_sub = rospy.Subscriber('rtk/status_v1', RTKStatusV1, self.rtk_callback)
+        self.gnss1_aiding_sub = rospy.Subscriber('gnss1/aiding_status', GNSSAidingStatus, self.gnss1_aiding_callback)
+        self.gnss2_aiding_sub = rospy.Subscriber('gnss2/aiding_status', GNSSAidingStatus, self.gnss2_aiding_callback)
+        self.filter_sub = rospy.Subscriber('nav/status', FilterStatus, self.filter_callback)
+        self.gnss1_fix_sub = rospy.Subscriber('gnss1/fix', NavSatFix, self.gnss1_fix_callback)
+        self.gnss2_fix_sub = rospy.Subscriber('gnss2/fix', NavSatFix, self.gnss2_fix_callback)
 
-    # Callback functions
+    # 3. Callback functions
     def odom_callback(self,data):
         self.odom_pub_status.data = True
 
@@ -77,12 +77,15 @@ class HealthMonitor():
         self.rtk_pub_status.data = True
 
     def gnss2_aiding_callback(self, data):
+        self.debug_msg.gnss2_aiding = data
         self.gnss2_aiding.data = True
 
     def gnss1_aiding_callback (self, data):
+        self.debug_msg.gnss1_aiding = data
         self.gnss1_aiding.data = True
 
     def filter_callback (self, data):
+        self.debug_msg.filter = data
         self.filter.data = True
 
     def gnss1_fix_callback (self, data):
@@ -117,7 +120,7 @@ class HealthMonitor():
             self.gnss2_fix.data = True
 
     
-
+    # 4. status for Overall Success
     def getStatus(self):
         status = (self.odom_pub_status.data and self.gnss1_pub_status.data and 
                     self.gnss2_pub_status.data and self.rtk_pub_status.data and 

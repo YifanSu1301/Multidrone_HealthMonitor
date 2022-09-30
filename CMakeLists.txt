@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   geometry_msgs
+  microstrain_inertial_msgs
   message_generation
 )
 
@@ -73,6 +74,7 @@ find_package(catkin REQUIRED COMPONENTS
     DEPENDENCIES
     std_msgs
     geometry_msgs
+    microstrain_inertial_msgs
  )
 
 ################################################
