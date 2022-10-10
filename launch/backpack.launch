@@ -1,0 +1,8 @@
+<launch>
+	<!-- <include file="$(find communication_manager)/launch/communication_manager.launch" /> -->
+	<node pkg="rosbag" type="record" name="record_gps" args="-a -o $(env HOME)/bags/backpack-rtk" output="screen" />
+	<node pkg="mf_gps_backpack" type="latlong2utm.py" name="test_utm_conversion" args="odom_in odom_out">
+	<remap from="/odom_in" to="/nav/odom" />
+        </node>
+	<include file="$(find mf_gps_backpack)/launch/test-rtk.launch" />
+</launch>

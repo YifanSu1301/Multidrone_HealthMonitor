@@ -1,0 +1,7 @@
+<launch>
+	<!-- <include file="$(find communication_manager)/launch/communication_manager.launch" /> -->
+	<node pkg="rosbag" type="record" name="record_gps" args="-a -o $(env HOME)/bags/backpack-rtk" output="screen" />
+
+	<include file="$(find mf_gps_backpack)/launch/test-rtk.launch" />
+</launch>
+

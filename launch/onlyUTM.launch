@@ -1,0 +1,4 @@
+<launch>
+	<remap from="/odom_in" to="/nav/odom" />
+	<node pkg="mf_gps_backpack" type="latlong2utm.py" name="test_utm_conversion" args="odom_in odom_out"> </node>
+</launch>
