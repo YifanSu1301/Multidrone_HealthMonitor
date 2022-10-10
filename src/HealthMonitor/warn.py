@@ -52,8 +52,10 @@ class WarningSystem():
             print("WARNING: GNSS 2 has covariance larger than 0.0004, {}.".format(sat2_covariance))
 
         # 3c. check the RTK 
-        if data.RTK_status != "Received":
-            print("WARNING: RTK is not working properly.")
+        if (not data.gnss1_aiding.integer_fix) and (not data.gnss2_aiding.integer_fix):
+            print("WARNING: No Integer Fix in either antenna.")
+
+
 
     
 
